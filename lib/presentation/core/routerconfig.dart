@@ -68,7 +68,7 @@ var routes = GoRouter(
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      context.push('/home');
+                      context.push('/home/task');
                     },
                     child: const Icon(Icons.next_plan),
                   ),
@@ -78,6 +78,33 @@ var routes = GoRouter(
                   ElevatedButton(
                     onPressed: () {
                       context.pop('/home/settings');
+                    },
+                    child: const Icon(Icons.restore_sharp),
+                  ),
+                ],
+              ),
+            );
+          }),
+          GoRoute(
+          path: '/home/task',
+          builder: (context, state) {
+            return Container(
+              color: Colors.red,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      context.push('/home');
+                    },
+                    child: const Icon(Icons.next_plan),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      context.pop('/home/start');
                     },
                     child: const Icon(Icons.restore_sharp),
                   ),
