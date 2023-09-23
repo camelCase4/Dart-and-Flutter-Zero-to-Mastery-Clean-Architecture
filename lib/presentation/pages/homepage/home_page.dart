@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 import 'package:go_router/go_router.dart';
+import 'package:todo_app/domain/entities/unique_id.dart';
+import 'package:todo_app/presentation/core/pageconfig.dart';
 import 'package:todo_app/presentation/pages/dashboard/dash_board.dart';
+import 'package:todo_app/presentation/pages/detail/todo_detail_page.dart';
 import 'package:todo_app/presentation/pages/overview/over_view.dart';
 import 'package:todo_app/presentation/pages/settings/settings_page.dart';
 
@@ -12,6 +15,8 @@ class HomePage extends StatefulWidget {
   }) : index = tabs.indexWhere((element) => element.name == tab);
 
   final int index;
+  static const PageConfig pageConfig =
+      PageConfig(icon: Icons.home_rounded, name: 'home');
 
   static const tabs = [
     DashboardPage.pageConfig,
@@ -73,7 +78,11 @@ class _HomePageState extends State<HomePage> {
           secondaryBody: SlotLayout(config: <Breakpoint, SlotLayoutConfig>{
             Breakpoints.mediumAndUp: SlotLayout.from(
               key: const Key('secondary-body-medium'),
-              builder: AdaptiveScaffold.emptyBuilder,
+              builder: widget.index != 1
+                  ? null
+                  : (_) => ToDoDetailPageProvider(
+                        collectionId: CollectionId(),
+                      ),
             )
           }),
         ),
@@ -82,5 +91,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _tapOnNavigationDestination(BuildContext context, int index) =>
-      context.go('/home/${HomePage.tabs[index].name}');
+      context.goNamed(HomePage.pageConfig.name, pathParameters: {
+        'tab': HomePage.tabs[index].name,
+      });
 }

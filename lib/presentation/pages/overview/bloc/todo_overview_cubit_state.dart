@@ -9,11 +9,11 @@ abstract class ToDoOverviewCubitState extends Equatable{
 }
 
 class ToDoOverviewCubitLoadingState extends ToDoOverviewCubitState{
-
+  const ToDoOverviewCubitLoadingState();
 }
 
 class ToDoOverviewCubitErrorState extends ToDoOverviewCubitState{
-
+  const ToDoOverviewCubitErrorState();
 }
 
 class ToDoOverviewCubitLoadedState extends ToDoOverviewCubitState{
