@@ -1,8 +1,9 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
 
-class UniqueId {
+class UniqueId with EquatableMixin{
   const UniqueId._(this.value);
 
   final String value;
@@ -15,9 +16,13 @@ class UniqueId {
   {
     return UniqueId._(uniqueString);
   }
+
+  
+  @override
+  List<Object?> get props => [value];
 }
 
-class CollectionId extends UniqueId{
+class CollectionId extends UniqueId with EquatableMixin{
 
   const CollectionId._(String value) : super._(value);
 
@@ -29,6 +34,7 @@ class CollectionId extends UniqueId{
   {
     return CollectionId._(uniqueString);
   }
+  
 }
 
 class EntryId extends UniqueId{

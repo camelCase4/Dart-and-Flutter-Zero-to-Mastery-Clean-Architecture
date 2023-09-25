@@ -7,9 +7,13 @@ class ToDoEntryItemLoading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //return const CircularProgressIndicator();
-    return Shimmer(
-      child: Container(
-        color: Colors.purple,
+    return ListTile(
+      title: Shimmer(
+        color: Theme.of(context).colorScheme.onBackground,
+        child: const Text(
+          "Loading ... ",
+          textAlign: TextAlign.center,
+        ),
       ),
     );
   }
